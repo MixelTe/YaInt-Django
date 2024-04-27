@@ -1,0 +1,223 @@
+<div class="border p-1 {% if widget.attrs.class %}{{ widget.attrs.class }}{% endif %}">
+	<div class="d-flex flex-column gap-2" id="{{widget.id}}">
+		<template id="ingredients-widget">
+			<div class="border bg-body-secondary p-1 d-grid" style="grid-template-columns: 1fr auto;" id="ingredients-widget-item">
+				<div>
+					<div class="d-grid" style="grid-template-columns: 1fr 1fr;">
+						<label class="form-label">
+							<span>Кол-во</span>
+							<input class="form-control" type="number" id="ingredients-widget-count">
+						</label>
+						<label class="form-label">
+							<span>Единица измерения</span>
+							<select class="form-control" id="ingredients-widget-unit">
+								{% for option in widget.unit_options %}
+								<option value="{{option.0}}">{{option.1}}</option>
+								{% endfor %}
+							</select>
+						</label>
+					</div>
+					<div>
+						<label class="form-label d-flex flex-column">
+							<span>Ингредиент</span>
+							<div class="ingredients-widget-search-container" id="ingredients-widget-ingredient-container">
+								<input class="d-none" type="text" id="ingredients-widget-ingredient-hidden">
+								<input autocomplete="off" type="text" id="ingredients-widget-ingredient" required>
+								<div class="ingredients-widget-search" id="ingredients-widget-ingredient-list">
+									{% for ingredient in widget.ingredients %}
+									<div class="ingredients-widget-search__item" data-id="{{ingredient.id}}">
+										{{ingredient.name}}
+									</div>
+									{% endfor %}
+									<div style="display: none;">
+										<h6 class="m-0">Нет такого ингредиента</h6>
+										<a href="/" target="_blank">Запросить его добавление</a>
+									</div>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+				<div>
+					<button class="btn btn-danger btn-sm" type="button" id="ingredients-widget-delete">-</button>
+				</div>
+			</div>
+		</template>
+	</div>
+	<div class="d-flex justify-content-end">
+		<button class="btn btn-success btn-sm" type="button" id="{{widget.id}}_add">+</button>
+	</div>
+	<script>
+		(() => {
+			const name = "{{widget.name}}";
+			const id = "{{widget.id}}";
+			const list = document.getElementById(id)
+			const template = document.getElementById("ingredients-widget");
+			const btn_add = document.getElementById("{{widget.id}}_add")
+			const ingredients = [{% for widget in widget.subwidgets %}
+				{% templatetag openbrace %} id: "{{widget.id}}", count: {{widget.count|floatformat}}, unit: "{{widget.unit}}", ingredient: {{widget.ingredient}} {% templatetag closebrace %},{% endfor %}
+			];
+			ingredients.forEach(addItem);
+			let lastId = 0;
+			btn_add.addEventListener("click", () => addItem({ id: `x${lastId++}` }));
+			function addItem(item)
+			{
+				const el = template.content.cloneNode(true);
+				const countEl = el.querySelector("#ingredients-widget-count");
+				const unitEl = el.querySelector("#ingredients-widget-unit");
+				const ingredientHiddenEl = el.querySelector("#ingredients-widget-ingredient-hidden");
+				const ingredientEl = el.querySelector("#ingredients-widget-ingredient");
+				const btn_delete = el.querySelector("#ingredients-widget-delete");
+				const itemEl = el.querySelector("#ingredients-widget-item");
+
+				countEl.value = item.count || 0;
+				unitEl.value = item.unit || "{{widget.unit_options.0.0}}";
+				ingredientHiddenEl.value = item.ingredient;
+				countEl.name = `${name}_${item.id}_count`;
+				unitEl.name = `${name}_${item.id}_unit`;
+				ingredientHiddenEl.name = `${name}_${item.id}_ingredient`;
+				itemEl.id = id + "_" + item.id;
+				btn_delete.addEventListener("click", () =>
+				{
+					const addedEl = document.getElementById(itemEl.id)
+					list.removeChild(addedEl);
+				});
+
+				const _ingredient_container = el.querySelector("#ingredients-widget-ingredient-container");
+				const _ingredient_input = el.querySelector("#ingredients-widget-ingredient");
+				const _ingredient_list = el.querySelector("#ingredients-widget-ingredient-list");
+				_ingredient_container.id = id + "_" + item.id + "_ingredients-widget-ingredient-container";
+				_ingredient_input.id = id + "_" + item.id + "_ingredients-widget-ingredient";
+				_ingredient_list.id = id + "_" + item.id + "_ingredients-widget-ingredient-list";
+				list.appendChild(el);
+
+				const ingredient_container = document.getElementById(_ingredient_container.id);
+				const ingredient_input = document.getElementById(_ingredient_input.id);
+				const ingredient_list = document.getElementById(_ingredient_list.id);
+				const ingredients = Array.from(ingredient_list.children).slice(0, -1).map(el =>
+				{
+					const ingredient = { el, name: el.innerText.trim(), nameNorm: normalize(el.innerText), id: el.getAttribute("data-id") }
+					el.addEventListener("mousedown", () => {
+						selectIngredient(ingredient);
+					});
+					return ingredient;
+				});
+				let lastIngredient = ingredients.find(v => v.id == item.ingredient);
+				let search_selected = 0;
+				let search_foundCount = 0;
+				ingredientEl.value = lastIngredient?.name || "";
+
+				ingredient_input.addEventListener("focus", () => {
+					ingredient_list.classList.add("ingredients-widget-search_visible")
+				})
+				ingredient_input.addEventListener("blur", () => {
+					ingredient_list.classList.remove("ingredients-widget-search_visible"),
+					setValue();
+				})
+				ingredient_input.addEventListener("keyup", e =>
+				{
+					if (e.key == "Escape")
+					{
+						ingredient_list.classList.remove("ingredients-widget-search_visible");
+						resetValue();
+					}
+				})
+				ingredient_input.addEventListener("keydown", e =>
+				{
+					if (e.key == "Enter")
+					{
+						e.preventDefault();
+						e.stopPropagation();
+						selected = search_selected;
+						const { foundAll } = search();
+						selectIngredient(foundAll[selected]);
+					}
+					if (e.key == "ArrowUp")
+					{
+						e.preventDefault();
+						console.log(search_selected);
+						search_selected = Math.max(0, search_selected - 1);
+						select();
+					}
+					if (e.key == "ArrowDown")
+					{
+						e.preventDefault();
+						search_selected = Math.min(search_foundCount - 1, search_selected + 1);
+						select();
+					}
+				})
+				ingredient_input.addEventListener("input", () => {
+					ingredient_list.classList.add("ingredients-widget-search_visible");
+					search();
+				});
+				search();
+
+				function search()
+				{
+					const search = normalize(ingredient_input.value);
+					let foundAny = false;
+					let foundAll = [];
+					let found = null;
+					ingredients.forEach(v => {
+						v.el.classList.remove("ingredients-widget-search__item_selected");
+						if (v.nameNorm.includes(search))
+						{
+							v.el.style.display = "";
+							foundAny = true;
+							foundAll.push(v);
+							if (v.nameNorm == search)
+								found = v;
+						}
+						else v.el.style.display = "none";
+					});
+					const not_found_el = ingredient_list.children[ingredient_list.children.length - 1];
+					not_found_el.style.display = foundAny ? "none" : "";
+					search_selected = 0;
+					select();
+					return { found, foundAll };
+				}
+				function select()
+				{
+					const search = normalize(ingredient_input.value);
+					let i = 0;
+					ingredients.forEach(v => {
+						v.el.classList.remove("ingredients-widget-search__item_selected");
+						if (v.nameNorm.includes(search))
+						{
+							if (i++ == search_selected)
+							{
+								v.el.classList.add("ingredients-widget-search__item_selected");
+								v.el.scrollIntoView({ block: "nearest" });
+							}
+						}
+					});
+					search_foundCount = i;
+				}
+				function setValue()
+				{
+					const { found } = search();
+					lastIngredient = found || lastIngredient;
+					ingredient_input.value = lastIngredient?.name || "";
+					ingredientHiddenEl.value = lastIngredient?.id || "-1";
+					if (found != lastIngredient) search();
+				}
+				function resetValue()
+				{
+					ingredient_input.value = lastIngredient?.name || "";
+					ingredientHiddenEl.value = lastIngredient?.id || "-1";
+					search();
+				}
+				function normalize(str)
+				{
+					return str.trim().toLowerCase().replaceAll(/\s+/g, "");
+				}
+				function selectIngredient(ingredient)
+				{
+					ingredient_input.value = ingredient?.name;
+					ingredient_list.classList.remove("ingredients-widget-search_visible");
+					setValue();
+				}
+			}
+		})()
+	</script>
+</div>

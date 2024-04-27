@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{{recipe.name}}
+{% endblock %}
+
+{% block content %}
+	<h2 class="text-center mt-4">{{recipe.name}}</h2>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-4 d-grid column-gap-2 bg-body-secondary rounded-2 p-2" style="grid-template-columns: auto 1fr;">
+			<h6 class="m-0"></h6>
+			<a href="{% url 'recipes:recipe-edit' recipe.id %}">edit</a>
+			<h6 class="m-0">main_image</h6>
+			<img src="{{recipe.get_image_128x128.url}}" alt="main_image">
+			<h6 class="m-0">author</h6>
+			<div>{{recipe.author}}</div>
+			<h6 class="m-0">created</h6>
+			<div>{{recipe.created}}</div>
+			<h6 class="m-0">state</h6>
+			<div>{{recipe.get_state_display}}</div>
+			<h6 class="m-0">categories</h6>
+			<ul>
+				{% for category in recipe.categories.all %}
+				<li>{{category}}</li>
+				{% empty %}нету{% endfor %}
+			</ul>
+			<h6 class="m-0">kitchen</h6>
+			<div>{{recipe.kitchen}}</div>
+			<h6 class="m-0">level</h6>
+			<div>{{recipe.get_level_display}}</div>
+			<h6 class="m-0">time</h6>
+			<div>{{recipe.time}} мин</div>
+			<h6 class="m-0">ingredients</h6>
+			<ul>
+				{% for ingredient in recipe.ingredients.all %}
+				<li>{{ingredient.ingredient}}: {{ingredient.count|floatformat}} {{ingredient.get_unit_display}}</li>
+				{% empty %}нету{% endfor %}
+			</ul>
+		</div>
+		<div class="col-12 col-md-6">
+			<div class="markdown">{{recipe.get_rendered_instruction|safe}}</div>
+			<div class="d-flex align-items-end">
+				<div>
+					<p class="mb-0">{% blocktranslate count counter=rating_count %}recipe__rating {{counter}}{{ rating }}{% plural %}recipe__rating {{counter}}{{ rating }}{% endblocktranslate %}</p>
+					{% if user.is_authenticated %}
+					{% if user_rating %}
+					<p class="mb-0">{% translate "recipe__user_rating" %} {{ user_rating.value }}</p>
+					{% endif %}
+					{% translate "recipe__rate" as submit_text_rate %}
+					{% include "includes/form.html" with form=rating_form submit_text=submit_text_rate %}
+					{% endif %}
+				</div>
+				{% if user_rating %}
+				<div>
+					{% translate "recipe__delete_rate" as submit_delete_text %}
+					{% include "includes/form.html" with form=delete_rating_form submit_text=submit_delete_text %}
+				</div>
+				{% endif %}
+				{% if user.is_authenticated %}
+				<div>
+					{% if user_cooked %}
+					{% include "includes/form.html" with form=delete_cooked_form submit_text="Убрать отметку о приготовлении" %}
+					{% else %}
+					{% include "includes/form.html" with form=cooked_form submit_text="Отметить как приготовленное" %}
+					{% endif %}
+				</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-12 col-md-8">
+			<h3>Комментарии</h3>
+			{% if user.is_authenticated %}
+			<div class="my-4 bg-body-secondary p-2 rounded">
+				<h5>Ваш комментарии {% if not user_comment %}(новый){% endif %}</h5>
+				{{ comment_form.media }}
+				{% include "includes/form.html" with form=comment_form %}
+				{% if user_comment %}
+				{% include "includes/form.html" with form=delete_comment_form submit_text="Удалить комментарии" %}
+				{% endif %}
+			</div>
+			{% endif %}
+			<div class="d-flex flex-column gap-2">
+				{% for comment in comments %}
+				<div class="bg-body-secondary p-2 rounded">
+					<div class="d-flex justify-content-between">
+						<h5>{{comment.author.username}}</h5>
+						<span>{{comment.created}}</span>
+					</div>
+					<div class="markdown">{{comment.get_rendered_text|safe}}</div>
+				</div>
+				{% empty %}Нет комментариев{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

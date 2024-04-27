@@ -1,0 +1,610 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-25 00:54+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\recipebook\core\apps.py:7
+msgid "app__core"
+msgstr "Core"
+
+#: .\recipebook\core\models.py:62
+msgid "error__no_unique_name"
+msgstr "Name is not unique"
+
+#: .\recipebook\feedback\apps.py:8
+msgid "app__feedback"
+msgstr "Feedback"
+
+#: .\recipebook\feedback\models.py:11
+msgid "rating__rating_choices__hate"
+msgstr "Hate"
+
+#: .\recipebook\feedback\models.py:12
+msgid "rating__rating_choices__dislike"
+msgstr "Dislike"
+
+#: .\recipebook\feedback\models.py:13
+msgid "rating__rating_choices__neutral"
+msgstr "Neutral"
+
+#: .\recipebook\feedback\models.py:14
+msgid "rating__rating_choices__like"
+msgstr "Like"
+
+#: .\recipebook\feedback\models.py:15
+msgid "rating__rating_choices__love"
+msgstr "Love"
+
+#: .\recipebook\feedback\models.py:22 .\recipebook\feedback\models.py:65
+#: .\recipebook\feedback\models.py:96 .\recipebook\recipes\models.py:99
+msgid "model__foreign__author"
+msgstr "author"
+
+#: .\recipebook\feedback\models.py:28 .\recipebook\feedback\models.py:71
+#: .\recipebook\feedback\models.py:102 .\recipebook\recipes\models.py:195
+#: .\recipebook\recipes\models.py:234
+msgid "model__foreign__recipe"
+msgstr "recipe"
+
+#: .\recipebook\feedback\models.py:32 .\recipebook\recipes\models.py:103
+msgid "model__created"
+msgstr "creation date"
+
+#: .\recipebook\feedback\models.py:36 .\recipebook\recipes\models.py:107
+msgid "model__updated"
+msgstr "update date"
+
+#: .\recipebook\feedback\models.py:41
+msgid "feedback__model__comment__text"
+msgstr "text"
+
+#: .\recipebook\feedback\models.py:45
+msgid "feedback__model__comment__verbose_name"
+msgstr "comment"
+
+#: .\recipebook\feedback\models.py:47
+msgid "feedback__model__comment__verbose_name_plural"
+msgstr "comments"
+
+#: .\recipebook\feedback\models.py:51
+msgid "feedback__model__comment__str"
+msgstr "comment %(id)s by %(author)s to %(recipe)s"
+
+#: .\recipebook\feedback\models.py:75
+msgid "feedback__model__rate__value"
+msgstr "rate"
+
+#: .\recipebook\feedback\models.py:80
+msgid "feedback__model__rate__verbose_name"
+msgstr "rate"
+
+#: .\recipebook\feedback\models.py:81
+msgid "feedback__model__rate__verbose_name_plural"
+msgstr "rates"
+
+#: .\recipebook\feedback\models.py:84
+msgid "feedback__model__rated__str"
+msgstr "rate %(id)s by %(author)s to %(recipe)s"
+
+#: .\recipebook\feedback\models.py:107
+msgid "feedback__model__cooked__verbose_name"
+msgstr "cooked"
+
+#: .\recipebook\feedback\models.py:108
+msgid "feedback__model__cooked__verbose_name_plural"
+msgstr "cooked"
+
+#: .\recipebook\feedback\models.py:111
+msgid "feedback__model__cooked__str"
+msgstr "cooked %(id)s by %(author)s to %(recipe)s"
+
+#: .\recipebook\recipebook\settings.py:135
+msgid "Russian"
+msgstr "Russian"
+
+#: .\recipebook\recipebook\settings.py:136
+msgid "English"
+msgstr "English"
+
+#: .\recipebook\recipes\apps.py:8
+msgid "app__recipes"
+msgstr "Recipes"
+
+#: .\recipebook\recipes\models.py:16
+msgid "recipes__level_choices__easy"
+msgstr "Easy"
+
+#: .\recipebook\recipes\models.py:17
+msgid "recipes__level_choices__normal"
+msgstr "Normal"
+
+#: .\recipebook\recipes\models.py:18
+msgid "recipes__level_choices__hard"
+msgstr "Hard"
+
+#: .\recipebook\recipes\models.py:19
+msgid "recipes__level_choices__extreme"
+msgstr "Very hard"
+
+#: .\recipebook\recipes\models.py:23
+msgid "recipes__unit_choices__grams"
+msgstr "Grams"
+
+#: .\recipebook\recipes\models.py:24
+msgid "recipes__unit_choices__kilogramme"
+msgstr "Kilogramme"
+
+#: .\recipebook\recipes\models.py:25
+msgid "recipes__unit_choices__litre"
+msgstr "Litre"
+
+#: .\recipebook\recipes\models.py:26
+msgid "recipes__unit_choices__millilitre"
+msgstr "Millilitre"
+
+#: .\recipebook\recipes\models.py:27
+msgid "recipes__unit_choices__piece"
+msgstr "Piece"
+
+#: .\recipebook\recipes\models.py:28
+msgid "recipes__unit_choices__pinch"
+msgstr "Pinch"
+
+#: .\recipebook\recipes\models.py:29
+msgid "recipes__unit_choices__tea_spoon"
+msgstr "Tea spoon"
+
+#: .\recipebook\recipes\models.py:30
+msgid "recipes__unit_choices__table_spoon"
+msgstr "Table spoon"
+
+#: .\recipebook\recipes\models.py:31
+msgid "recipes__unit_choices__cup"
+msgstr "Cup"
+
+#: .\recipebook\recipes\models.py:35
+msgid "recipes__recipe_state__published"
+msgstr "Published"
+
+#: .\recipebook\recipes\models.py:36
+msgid "recipes__recipe_state__moderated"
+msgstr "Moderated"
+
+#: .\recipebook\recipes\models.py:37
+msgid "recipes__recipe_state__rejected"
+msgstr "Rejected"
+
+#: .\recipebook\recipes\models.py:42
+msgid "recipes__model__category__name"
+msgstr "name"
+
+#: .\recipebook\recipes\models.py:48
+msgid "recipes__model__category__verbose_name"
+msgstr "category"
+
+#: .\recipebook\recipes\models.py:50
+msgid "recipes__model__category__verbose_name_plural"
+msgstr "categories"
+
+#: .\recipebook\recipes\models.py:59
+msgid "recipes__model__kitchen__name"
+msgstr "name"
+
+#: .\recipebook\recipes\models.py:65
+msgid "recipes__model__kitchen__verbose_name"
+msgstr "kitchen"
+
+#: .\recipebook\recipes\models.py:66
+msgid "recipes__model__kitchen__verbose_name_plural"
+msgstr "kitchens"
+
+#: .\recipebook\recipes\models.py:74
+msgid "recipes__model__ingredient__name"
+msgstr "name"
+
+#: .\recipebook\recipes\models.py:80
+msgid "recipes__model__ingredient__verbose_name"
+msgstr "ingredient"
+
+#: .\recipebook\recipes\models.py:82
+msgid "recipes__model__ingredient__verbose_name_plural"
+msgstr "ingredients"
+
+#: .\recipebook\recipes\models.py:93
+msgid "recipes__model__recipe__name"
+msgstr "title"
+
+#: .\recipebook\recipes\models.py:112
+msgid "recipes__model__recipe__state"
+msgstr "state"
+
+#: .\recipebook\recipes\models.py:119
+msgid "model__foreign__categories"
+msgstr "categories"
+
+#: .\recipebook\recipes\models.py:125
+msgid "model__foreign__kitchen"
+msgstr "kitchen"
+
+#: .\recipebook\recipes\models.py:131
+msgid "recipes__model__recipe__instruction"
+msgstr "instruction"
+
+#: .\recipebook\recipes\models.py:135
+msgid "recipes__model__recipe__main_image"
+msgstr "main image"
+
+#: .\recipebook\recipes\models.py:142
+msgid "recipes__model__recipe__level"
+msgstr "level"
+
+#: .\recipebook\recipes\models.py:145
+msgid "recipes__model__recipe__time"
+msgstr "cooking time (min)"
+
+#: .\recipebook\recipes\models.py:149
+msgid "recipes__model__recipe__verbose_name"
+msgstr "recipe"
+
+#: .\recipebook\recipes\models.py:150
+msgid "recipes__model__recipe__verbose_name_plural"
+msgstr "recipes"
+
+#: .\recipebook\recipes\models.py:184 .\recipebook\recipes\models.py:267
+#: .\recipebook\users\models.py:115
+msgid "model__image__no_image"
+msgstr "no image"
+
+#: .\recipebook\recipes\models.py:186 .\recipebook\recipes\models.py:273
+#: .\recipebook\users\models.py:117
+msgid "model__image__preview"
+msgstr "preview"
+
+#: .\recipebook\recipes\models.py:200
+msgid "model__foreign__ingredient"
+msgstr "ingredient"
+
+#: .\recipebook\recipes\models.py:203
+msgid "recipes__model__recipe_ingredient__count"
+msgstr "count"
+
+#: .\recipebook\recipes\models.py:210
+msgid "recipes__model__recipe_ingredient__unit"
+msgstr "unit"
+
+#: .\recipebook\recipes\models.py:216
+msgid "recipes__model__recipe_ingredient__verbose_name"
+msgstr "ingredient in recipe"
+
+#: .\recipebook\recipes\models.py:218
+msgid "recipes__model__recipe_ingredient__verbose_name_plural"
+msgstr "ingredients in recipes"
+
+#: .\recipebook\recipes\models.py:222
+msgid "recipes__model__recipe_ingredient__str"
+msgstr "[%(id)s] ingredient %(ingredient)s for %(recipe)s"
+
+#: .\recipebook\recipes\models.py:238
+msgid "recipes__model__recipe_image__image"
+msgstr "image"
+
+#: .\recipebook\recipes\models.py:242
+msgid "recipes__model__recipe_image__verbose_name"
+msgstr "recipe image"
+
+#: .\recipebook\recipes\models.py:244
+msgid "recipes__model__recipe_image__verbose_name_plural"
+msgstr "recipe images"
+
+#: .\recipebook\recipes\models.py:248
+msgid "recipes__model__recipe_image__str"
+msgstr "image %(id)s for %(recipe)s"
+
+#. Translators: Заголовок страницы
+#: .\recipebook\templates\base.html:22
+#: .\recipebook\templates\includes\header.html:8
+msgid "title"
+msgstr "Recipe book"
+
+#: .\recipebook\templates\base.html:33
+msgid "empty_base_template"
+msgstr "empty"
+
+#: .\recipebook\templates\includes\footer.html:17
+msgid "footer__set_lang"
+msgstr "Set"
+
+#: .\recipebook\templates\includes\form.html:47
+msgid "form__send"
+msgstr "sending form"
+
+#: .\recipebook\templates\includes\header.html:19
+msgid "nav_menu__add_recipe"
+msgstr "Add recipe"
+
+#: .\recipebook\templates\includes\header.html:24
+msgid "nav_menu__admin"
+msgstr "Admin page"
+
+#: .\recipebook\templates\includes\header.html:37
+msgid "header__user__profile"
+msgstr "Profile"
+
+#: .\recipebook\templates\includes\header.html:38
+msgid "header__user__change_password"
+msgstr "Change password"
+
+#: .\recipebook\templates\includes\header.html:40
+msgid "header__user__logout"
+msgstr "Log out"
+
+#: .\recipebook\templates\includes\header.html:46
+msgid "header__user__login"
+msgstr "Log in"
+
+#: .\recipebook\templates\includes\header.html:49
+msgid "header__user__signup"
+msgstr "Sign Up"
+
+#: .\recipebook\templates\recipes\recipe.html:46
+#, python-format
+msgid "recipe__rating %(counter)s%(rating)s"
+msgid_plural "recipe__rating %(counter)s%(rating)s"
+msgstr[0] "Rating: %(rating)s (%(counter)s rating)"
+msgstr[1] "Rating: %(rating)s (%(counter)s ratings)"
+
+#: .\recipebook\templates\recipes\recipe.html:49
+msgid "recipe__user_rating"
+msgstr "Your rating: "
+
+#: .\recipebook\templates\recipes\recipe.html:51
+msgid "recipe__rate"
+msgstr "Rate"
+
+#: .\recipebook\templates\recipes\recipe.html:57
+msgid "recipe__delete_rate"
+msgstr "Delete rate"
+
+#: .\recipebook\templates\recipes\search.html:6
+msgid "recipes__search__title"
+msgstr "Recipe search"
+
+#: .\recipebook\templates\users\activate_done.html:5
+#: .\recipebook\templates\users\activate_done.html:9
+msgid "activate_done__title"
+msgstr "Account activation"
+
+#: .\recipebook\templates\users\deactivation_email.html:2
+#: .\recipebook\templates\users\signup_email.html:2
+msgid "signup_email__greet"
+msgstr "Dear"
+
+#: .\recipebook\templates\users\deactivation_email.html:4
+msgid "deactivation_email__text"
+msgstr ""
+"Your account has been blocked due to too many unsuccessful login attempts. "
+"To unblock your account, please follow this link:"
+
+#: .\recipebook\templates\users\deactivation_email.html:7
+#: .\recipebook\templates\users\password_reset_email.html:10
+#: .\recipebook\templates\users\signup_email.html:7
+msgid "password_reset_email__thanks"
+msgstr "Thanks for using our site!"
+
+#: .\recipebook\templates\users\deactivation_email.html:9
+#: .\recipebook\templates\users\password_reset_email.html:12
+#: .\recipebook\templates\users\signup_email.html:9
+#, python-format
+msgid "password_reset_email__team %(site_name)s"
+msgstr "The %(site_name)s team"
+
+#: .\recipebook\templates\users\login.html:5
+#: .\recipebook\templates\users\login.html:9
+msgid "login__title"
+msgstr "Log in"
+
+#: .\recipebook\templates\users\login.html:20
+msgid "login__submit"
+msgstr "Log in"
+
+#: .\recipebook\templates\users\login.html:22
+msgid "signup__reset_password"
+msgstr "Reset password"
+
+#: .\recipebook\templates\users\password_change.html:5
+#: .\recipebook\templates\users\password_change.html:9
+msgid "password_change__title"
+msgstr "Password change"
+
+#: .\recipebook\templates\users\password_change.html:13
+msgid "password_change__submit"
+msgstr "Change password"
+
+#: .\recipebook\templates\users\password_change_done.html:5
+#: .\recipebook\templates\users\password_change_done.html:9
+msgid "password_change_done__title"
+msgstr "Password changed"
+
+#: .\recipebook\templates\users\password_reset.html:5
+#: .\recipebook\templates\users\password_reset.html:9
+msgid "password_reset__title"
+msgstr "Password recovery"
+
+#: .\recipebook\templates\users\password_reset.html:12
+msgid "password_reset__hint"
+msgstr ""
+"Forgot your password? Enter your email address below and we will send you "
+"instructions on how to set a new password."
+
+#: .\recipebook\templates\users\password_reset.html:13
+msgid "password_reset__submit"
+msgstr "Recover"
+
+#: .\recipebook\templates\users\password_reset_complete.html:5
+msgid "password_reset_complete__title"
+msgstr "Password recovered"
+
+#: .\recipebook\templates\users\password_reset_complete.html:11
+msgid "password_reset_complete__text"
+msgstr "Your password has been set. You may go ahead and log in now."
+
+#: .\recipebook\templates\users\password_reset_complete.html:12
+msgid "password_reset_complete__login"
+msgstr "Log in"
+
+#: .\recipebook\templates\users\password_reset_confirm.html:6
+msgid "password_reset_confirm__title"
+msgstr "Password recovery"
+
+#: .\recipebook\templates\users\password_reset_confirm.html:14
+msgid "password_reset_confirm__text"
+msgstr ""
+"Please enter your new password twice so we can make sure you enter it "
+"correctly."
+
+#: .\recipebook\templates\users\password_reset_confirm.html:23
+msgid "password_reset_confirm__new_password"
+msgstr "New password:"
+
+#: .\recipebook\templates\users\password_reset_confirm.html:36
+msgid "password_reset_confirm__confirm_password"
+msgstr "Confirm password:"
+
+#: .\recipebook\templates\users\password_reset_confirm.html:48
+msgid "password_reset_confirm__change_password"
+msgstr "Change my password"
+
+#: .\recipebook\templates\users\password_reset_confirm.html:58
+msgid "password_reset_confirm__error"
+msgstr ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+
+#: .\recipebook\templates\users\password_reset_done.html:5
+#: .\recipebook\templates\users\password_reset_done.html:9
+msgid "password_reset_done__title"
+msgstr "Password recovery"
+
+#: .\recipebook\templates\users\password_reset_done.html:13
+msgid "password_reset_done__text"
+msgstr ""
+"<p>An email with password recovery instructions has been sent</p><p>We have "
+"sent you instructions on how to set a new password to the specified email "
+"address (if there is such an address in our database). You should get it "
+"soon.</p><p>If you have not received the email, please make sure that you "
+"have entered the address you registered with and check the spam folder.</p>"
+
+#: .\recipebook\templates\users\password_reset_email.html:2
+#, python-format
+msgid "password_reset_email__explain %(site_name)s"
+msgstr ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+
+#: .\recipebook\templates\users\password_reset_email.html:4
+msgid "password_reset_email__please"
+msgstr "Please go to the following page and choose a new password:"
+
+#: .\recipebook\templates\users\password_reset_email.html:8
+msgid "password_reset_email__username"
+msgstr "Your username, in case you’ve forgotten:"
+
+#: .\recipebook\templates\users\profile.html:6
+#: .\recipebook\templates\users\profile.html:10
+msgid "profile__title"
+msgstr "Profile"
+
+#: .\recipebook\templates\users\profile.html:28
+msgid "profile__submit"
+msgstr "Change"
+
+#: .\recipebook\templates\users\signup.html:5
+#: .\recipebook\templates\users\signup.html:9
+msgid "signup__title"
+msgstr "Registration"
+
+#: .\recipebook\templates\users\signup.html:12
+msgid "signup__submit"
+msgstr "Sign up"
+
+#: .\recipebook\templates\users\signup_email.html:4
+msgid "signup_email__text"
+msgstr ""
+"You have registered on our website, click on the link to complete the "
+"registration:"
+
+#: .\recipebook\users\apps.py:8
+msgid "app__users"
+msgstr "Users"
+
+#: .\recipebook\users\backends.py:76
+msgid "deactivation_email__subject"
+msgstr "Account deactivation"
+
+#: .\recipebook\users\models.py:56
+msgid "users__model__user__email"
+msgstr "email"
+
+#: .\recipebook\users\models.py:60
+msgid "users__model__user__image"
+msgstr "avatar"
+
+#: .\recipebook\users\models.py:66
+msgid "users__model__user__trusted"
+msgstr "trusted user"
+
+#: .\recipebook\users\models.py:70
+msgid "users__model__user__attempts_count"
+msgstr "attempts count"
+
+#: .\recipebook\users\models.py:74
+msgid "users__model__user__deactivation_date"
+msgstr "deactivation date"
+
+#: .\recipebook\users\models.py:80
+msgid "users__model__user__verbose_name"
+msgstr "user"
+
+#: .\recipebook\users\models.py:82
+msgid "users__model__user__verbose_name_plural"
+msgstr "users"
+
+#: .\recipebook\users\views.py:48
+msgid "signup__mail__subject"
+msgstr "Registration"
+
+#: .\recipebook\users\views.py:56
+msgid "signup__success_message"
+msgstr ""
+"To complete your registration, follow the link sent to your email: %(email)s"
+
+#: .\recipebook\users\views.py:74
+msgid "activate__error_message"
+msgstr "Invalid link"
+
+#: .\recipebook\users\views.py:81 .\recipebook\users\views.py:84
+msgid "activate__old_message"
+msgstr "Invalid link: expired"
+
+#: .\recipebook\users\views.py:90
+msgid "activate__success_message"
+msgstr "Your account has been successfully activated!"
+
+#: .\recipebook\users\views.py:107
+msgid "profile__success_message"
+msgstr "Changes has been successfully saved!"

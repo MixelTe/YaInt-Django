@@ -1,0 +1,57 @@
+{% load static %}
+{% load i18n %}
+<header>
+	<nav class="navbar navbar-expand-md fixed-top bg-light">
+		<div class="container-fluid container">
+			<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+				<img src="{% static 'img/icon48.png' %}" alt="logo" class="rounded me-2">
+				<span class="navbar-brand">{% translate "title" %}</span>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			{% with request.resolver_match.view_name as view_name %}
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item">
+						<a class="nav-link {% if view_name == 'recipes:recipe-add' %}active{% endif %}"
+							href="{% url 'recipes:recipe-add' %}">{% translate "nav_menu__add_recipe" %}</a>
+					</li>
+					{% if user.is_superuser %}
+					<li class="nav-item">
+						<a class="nav-link"
+							href="{% url 'admin:index' %}">{% translate "nav_menu__admin" %}</a>
+					</li>
+					{% endif %}
+				</ul>
+				{% if user.is_authenticated %}
+					<div class="dropdown">
+						<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							{% if user.image %}
+							<img src="{{user.get_image_32x32.url}}" alt="{{user.name}}" width="32" height="32" class="rounded-circle">
+							{% endif %}
+							<span class="mx-1">{{user.username}}</span>
+						</a>
+						<ul class="dropdown-menu text-small" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);">
+							<li><a class="dropdown-item" href="{% url 'users:profile' %}">{% translate "header__user__profile" %}</a></li>
+							<li><a class="dropdown-item" href="{% url 'users:password_change' %}">{% translate "header__user__change_password" %}</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="{% url 'users:logout' %}">{% translate "header__user__logout" %}</a></li>
+						</ul>
+					</div>
+				{% else %}
+					<div>
+						{% if view_name != "users:login" %}
+						<a type="button" class="btn btn-outline-primary me-2" href="{% url 'users:login' %}">{% translate "header__user__login" %}</a>
+						{% endif %}
+						{% if view_name != "users:signup" %}
+						<a type="button" class="btn btn-primary me-2" href="{% url 'users:signup' %}">{% translate "header__user__signup" %}</a>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+			{% endwith %}
+		</div>
+	</nav>
+</header>

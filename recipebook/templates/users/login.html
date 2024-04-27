@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% translate "login__title" %}
+{% endblock %}
+
+{% block content %}
+	<h2 class="text-center mt-4">{% translate "login__title" %}</h2>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-6 col-lg-4">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert {% if message.tags == 'success' %}alert-success{% endif %}">
+						<span>{{ message }}</span>
+					</div>
+				{% endfor %}
+			{% endif %}
+			{% translate "login__submit" as submit %}
+			{% include "includes/form.html" with form=form submit_text=submit %}
+			<a class="link d-block mt-4" href="{% url 'users:password_reset' %}">{% translate "signup__reset_password" %}</a>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% load i18n %}{% autoescape off %}
+{% translate "signup_email__greet" %} {{ username }}!
+
+{% translate "signup_email__text" %}
+{{ protocol }}://{{ domain }}{% url "users:activate" uidb64=uid token=token %}
+
+{% translate "password_reset_email__thanks" %}
+
+{% blocktranslate %}password_reset_email__team {{ site_name }}{% endblocktranslate %}
+
+{% endautoescape %}

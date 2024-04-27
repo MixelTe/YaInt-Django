@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% translate "recipes__search__title" %}
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/search.css' %}">
+	<script src="{% static 'js/search.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+	<h2 class="text-center mt-4">Поиск</h2>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-8">
+			<div class="mb-4 d-grid" style="grid-template-columns: 1fr 1fr;">
+				<div>
+					<div>
+                        <span>Название:</span>
+                        <input autocomplete="off" type="text" id="search-name" class="form-control">
+					</div>
+					<div>
+						<span>Содержатся: </span>
+						<span class="search-ingredients" id="search-ingredient-include"></span>
+					</div>
+					<div>
+						<span>Исключить: </span>
+						<span class="search-ingredients" id="search-ingredient-exclude"></span>
+					</div>
+				</div>
+				<div>
+					<span>Ингредиенты:</span>
+					<div class="search-container" id="search-ingredient-container">
+						<input autocomplete="off" type="text" id="search-ingredient-input" class="form-control ms-2">
+						<div class="search" id="search-ingredient-list">
+							{% for ingredient in ingredients %}
+							<div class="search__item" data-id="{{ingredient.id}}">
+								<span>{{ingredient.name}}</span>
+								<span class="search__btns">
+									<label>
+										<input type="checkbox" id="search-ingredient-include-chb">
+										<span>искать</span>
+									</label>
+									<label>
+										<input type="checkbox" id="search-ingredient-exclude-chb">
+										<span>исключить</span>
+									</label>
+								</span>
+							</div>
+							{% endfor %}
+							<div style="display: none;">
+								<h6 class="m-0">Нет такого ингредиента</h6>
+								<a href="/" target="_blank">Запросить его добавление</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<span>Категория:</span>
+						<select id="search-category">
+							<option value="">Любая</option>
+							{% for categoriy in categories %}
+							<option value="{{categoriy.id}}">{{categoriy.name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div>
+						<span>Кухня:</span>
+						<select id="search-kitchen">
+							<option value="">Любая</option>
+							{% for kitchen in kitchens %}
+							<option value="{{kitchen.id}}">{{kitchen.name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div>
+						<span>Сложность:</span>
+						<select id="search-level">
+							<option value="">Любая</option>
+							{% for level in levels %}
+							<option value="{{level.0}}">{{level.1}}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div>
+					<button class="btn btn-primary" id="search-btn">Искать!</button>
+					<button class="btn btn-secondary " id="search-clear-btn">Очистить поиск</button>
+				</div>
+			</div>
+			<div>
+				<span>Сортировка:</span>
+				<button class="btn btn-sm btn-link" id="sort-name">По названию</button>
+				<button class="btn btn-sm btn-link" id="sort-new">Новые</button>
+				<button class="btn btn-sm btn-link" id="sort-easy">Лёгкие</button>
+				<button class="btn btn-sm btn-link" id="sort-fast">Быстрые</button>
+			</div>
+			<div class="d-grid gap-4" style="grid-template-columns: 1fr 1fr;">
+				{% for recipe in recipes %}
+				<div class="d-grid column-gap-2 bg-body-secondary rounded-2 p-2" style="grid-template-columns: auto auto;">
+					<h6 class="m-0">name</h6>
+					<a href="{% url 'recipes:recipe' recipe.id %}">{{recipe.name}}</a>
+					<h6 class="m-0"></h6>
+					<a href="{% url 'recipes:recipe-edit' recipe.id %}">edit</a>
+					<h6 class="m-0">main_image</h6>
+					<img src="{{recipe.get_image_128x128.url}}" alt="main_image">
+					<h6 class="m-0">author</h6>
+					<div>{{recipe.author}}</div>
+					<h6 class="m-0">created</h6>
+					<div>{{recipe.created}}</div>
+					<h6 class="m-0">state</h6>
+					<div>{{recipe.get_state_display}}</div>
+					<h6 class="m-0">categories</h6>
+					<ul>
+						{% for category in recipe.categories.all %}
+						<li>{{category}}</li>
+						{% empty %}нету{% endfor %}
+					</ul>
+					<h6 class="m-0">kitchen</h6>
+					<div>{{recipe.kitchen}}</div>
+					<h6 class="m-0">level</h6>
+					<div>{{recipe.get_level_display}}</div>
+					<h6 class="m-0">time</h6>
+					<div>{{recipe.time}} мин</div>
+					<h6 class="m-0">ingredients</h6>
+					<ul>
+						{% for ingredient in recipe.ingredients.all %}
+						<li>{{ingredient.ingredient}}: {{ingredient.count|floatformat}} {{ingredient.get_unit_display}}</li>
+						{% empty %}нету{% endfor %}
+					</ul>
+				</div>
+				{% empty %}
+				<h3>Ничего не найдено</h3>
+				{% endfor %}
+			</div>
+			<div class="d-flex align-items-center justify-content-center my-3">
+				<span class="step-links" id="pagination">
+					{% if page_obj.has_previous %}
+						<button class="btn btn-success btn-sm" data-page="1">&laquo; first</button>
+						<button class="btn btn-primary btn-sm" data-page="{{ page_obj.previous_page_number }}">previous</button>
+					{% endif %}
+
+					<span class="mx-1">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+
+					{% if page_obj.has_next %}
+						<button class="btn btn-primary btn-sm" data-page="{{ page_obj.next_page_number }}">next</button>
+						<button class="btn btn-success btn-sm" data-page="{{ page_obj.paginator.num_pages }}">last &raquo;</button>
+					{% endif %}
+				</span>
+			</div>
+		</div>
+	</div>
+{% endblock %}

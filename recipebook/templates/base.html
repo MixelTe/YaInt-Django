@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{LANGUAGE_CODE}}" class="h-100">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+	<link rel="icon" type="image/x-icon" href="{% static 'img/favicon/favicon.ico' %}">
+	<link rel="manifest" href="{% static 'files/site.webmanifest' %}">
+	<link rel="mask-icon" href="{% static 'img/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+	<meta name="msapplication-config" content="{% static 'files/browserconfig.xml' %}" />
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	{% comment %}Translators: Заголовок страницы{% endcomment %}
+	<title>{% block title %}{% translate "title" %}{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
+	{% block head %}{% endblock %}
+</head>
+
+<body class="d-flex flex-column h-100">
+	{% include "includes/header.html" %}
+	{% get_current_language as LANGUAGE_CODE %}
+	<main class="container flex-shrink-0 flex-grow-1 mb-4" style="padding-top: 75px;">
+		{% block content %}{% translate "empty_base_template" %}{% endblock %}
+	</main>
+	{% include "includes/footer.html" %}
+</body>
+
+</html>

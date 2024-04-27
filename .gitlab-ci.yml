@@ -1,0 +1,15 @@
+stages:
+- linting
+
+flake8:
+    stage: linting
+    image: registry.gitlab.com/pipeline-components/flake8:latest
+    script:
+        - pip install -r requirements/flake.txt
+        - flake8 --verbose .
+
+black:
+    stage: linting
+    image: registry.gitlab.com/pipeline-components/black:latest
+    script:
+        - black --check --diff --verbose -- .

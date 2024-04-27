@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+{% translate "profile__title" %}
+{% endblock %}
+
+{% block content %}
+	<h2 class="text-center mb-4">{% translate "profile__title" %}</h2>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-6 col-lg-4">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert {% if message.tags == 'success' %}alert-success{% endif %}">
+						<span>{{ message }}</span>
+					</div>
+				{% endfor %}
+			{% endif %}
+			<div class="d-flex justify-content-center mb-3">
+				{% if user.image %}
+				<img src="{{user.get_image_128x128.url}}" alt="{{user.username}}" width="128" height="128" class="rounded-circle flex-shrink-0">
+				{% else %}
+				<img src="{% static 'img/img.svg' %}" alt="{{user.username}}" width="128" height="128" class="rounded-circle flex-shrink-0">
+				{% endif %}
+			</div>
+			{% translate "profile__submit" as submit_text %}
+			<p>Почта: {{ user.email }}</p>
+			{% include "includes/form.html" with form=form submit_text=submit_text %}
+		</div>
+	</div>
+{% endblock %}

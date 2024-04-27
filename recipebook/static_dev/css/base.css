@@ -1,0 +1,67 @@
+.markdown {
+	overflow: auto;
+}
+
+.markdown blockquote {
+	color: #666;
+	border-left: 4px solid #ddd;
+	padding-left: 20px;
+	margin-left: 0;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.markdown p {
+	margin-bottom: 0.5rem;
+}
+
+.markdown img {
+	border-radius: 0.5rem;
+	max-height: 40vh;
+}
+
+.markdown table {
+	margin-block: 1rem;
+}
+.markdown thead {
+	background-color: #eee;
+}
+.markdown th:first-child {
+	border-top-left-radius: 0.25rem;
+}
+.markdown th:last-child {
+	border-top-right-radius: 0.25rem;
+}
+.markdown tr:not(:last-child) {
+	border-bottom: 1px solid #ddd;
+}
+.markdown th,
+.markdown td {
+	padding-inline: 0.5em;
+}
+
+.download_image {
+	position: relative;
+}
+.download_image > a {
+	position: absolute;
+	background-color: white;
+	z-index: 2;
+	top: 0.25em;
+	left: 0.25em;
+	width: 1.8em;
+	height: 1.8em;
+	border-radius: 0.25em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.6;
+	transition: opacity 150ms;
+}
+.download_image:hover > a {
+	opacity: 0.9;
+}
+.download_image > a img {
+	width: 1.6em;
+	height: 1.6em;
+}
